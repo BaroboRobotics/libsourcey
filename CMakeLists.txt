@@ -132,12 +132,12 @@ else()
   set(CMAKE_FIND_LIBRARY_PREFIXES "lib")
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".so" ".a")
   set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} 
-    /home/deploy/build/lib
+    #/home/deploy/build/lib
     /usr/lib
     /usr/local/lib)
 
   # Temp fix for "/usr/bin/ld: cannot find -lavcodec"
-  link_directories(/home/deploy/build/lib)
+  #link_directories(/home/deploy/build/lib)
 endif()
 
 # Append some common search paths for find_path
@@ -233,6 +233,8 @@ if(MSVC)
   set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} crypt32.lib advapi32.lib iphlpapi.lib psapi.lib shell32.lib ws2_32.lib dsound.lib winmm.lib strmiids.lib")
 elseif(MSYS)
   set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} -lws2_32 -liphlpapi") #${LibSourcey_INCLUDE_LIBRARIES} 
+elseif(APPLE)
+  set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} -lm -lz -ldl") # -llibc -lglibc #${LibSourcey_INCLUDE_LIBRARIES} 
 elseif(UNIX)
   set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} -lm -lz -ldl -lrt") # -llibc -lglibc #${LibSourcey_INCLUDE_LIBRARIES} 
 endif()
@@ -395,10 +397,9 @@ if(BUILD_MODULES OR BUILD_APPLICATIONS)
     set(dir "${LibSourcey_DIR}/src/${name}")
     if (EXISTS "${dir}/CMakeLists.txt")
       add_subdirectory(${dir})
+      list(APPEND allModuleObjects $<TARGET_OBJECTS:${name}>)
+      list(APPEND allModuleIncludeDirs ${LibSourcey_DIR}/src/${name}/include)
     endif()
-    list(APPEND allModuleObjects $<TARGET_OBJECTS:${name}>)
-    list(APPEND allModuleIncludeDirs ${LibSourcey_DIR}/src/${name}/include)
-    #list(APPEND allModuleIncludeDirs $<TARGET_PROPERTY:${name},INTERFACE_INCLUDE_DIRECTORIES>)
   endforeach()
 
   # Monolithic library, including pacm
@@ -426,7 +427,7 @@ if(BUILD_MODULES OR BUILD_APPLICATIONS)
   if(WIN32)
     set(dest .)
   elseif(APPLE)
-    set(dest ../MacOS)
+    set(dest Contents/MacOS)
   else()
     set(dest lib)
   endif()
