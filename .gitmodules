@@ -1,3 +1,3 @@
 [submodule "src/pacm"]
 	path = src/pacm
-	url = git@github.com:sourcey/pacm.git
+	url = git@github.com:BaroboRobotics/pacm.git
