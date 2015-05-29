@@ -61,10 +61,10 @@ SCYAPI Int64 filesize(const std::string& path);
 SCYAPI void readdir(const std::string& path, std::vector<std::string>& res);
 	// Returns a list of all files and folders in the directory. 
 
-SCYAPI void mkdir(const std::string& path, int mode = 0);
+SCYAPI void mkdir(const std::string& path, int mode = 0755);
 	// Creates a directory. 
 
-SCYAPI void mkdirr(const std::string& path, int mode = 0);
+SCYAPI void mkdirr(const std::string& path, int mode = 0755);
 	// Creates a directory recursively. 
 
 SCYAPI void rmdir(const std::string& path);
