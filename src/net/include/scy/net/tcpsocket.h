@@ -20,7 +20,7 @@
 #ifndef SCY_Net_TCPSocket_H
 #define SCY_Net_TCPSocket_H
 
-
+#include "scy/dllexport.h"
 #include "scy/uv/uvpp.h"
 #include "scy/net/tcpsocket.h"
 #include "scy/net/socket.h"
@@ -33,7 +33,7 @@ namespace scy {
 namespace net {
 
 
-class TCPSocket: public Stream, public net::Socket
+class SCYAPI TCPSocket: public Stream, public net::Socket
 {
 public:	
 	typedef std::shared_ptr<TCPSocket> Ptr;

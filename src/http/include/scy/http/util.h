@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_Utilities_h
 #define SCY_HTTP_Utilities_h
 
-
+#include "scy/dllexport.h"
 #include "scy/base.h"
 #include "scy/collection.h"
 
@@ -30,22 +30,22 @@ namespace scy {
 namespace http {
 	
 
-std::string parseURI(const std::string& request);
+SCYAPI std::string parseURI(const std::string& request);
 	/// Parses the URI part from a HTTP request.
 
-bool matchURL(const std::string& uri, const std::string& expression);
+SCYAPI bool matchURL(const std::string& uri, const std::string& expression);
 	/// Parses the URI against the expression.
 
-bool matchURL(const std::string& uri, const std::string& expression);
+SCYAPI bool matchURL(const std::string& uri, const std::string& expression);
 	/// Parses the URI against the expression.
 
-std::string parseCookieItem(const std::string& cookie, const std::string& item);
+SCYAPI std::string parseCookieItem(const std::string& cookie, const std::string& item);
 	/// Parses an item from a HTTP cookie.
 
-bool splitURIParameters(const std::string& uri, NVCollection& out);
+SCYAPI bool splitURIParameters(const std::string& uri, NVCollection& out);
 	/// Splits and adds the URI query parameters into the given collection.
 
-void splitParameters(const std::string& s, std::string& value, NVCollection& parameters);
+SCYAPI void splitParameters(const std::string& s, std::string& value, NVCollection& parameters);
 	/// Splits the given std::string into a value and a collection of parameters.
 	/// Parameters are expected to be separated by semicolons.
 	///
@@ -58,7 +58,7 @@ void splitParameters(const std::string& s, std::string& value, NVCollection& par
 	/// and the parameter
 	///   boundary -> boundary-01234567
 
-void splitParameters(const std::string::const_iterator& begin, const std::string::const_iterator& end, NVCollection& parameters);
+SCYAPI void splitParameters(const std::string::const_iterator& begin, const std::string::const_iterator& end, NVCollection& parameters);
 	/// Splits the given std::string into a collection of parameters.
 	/// Parameters are expected to be separated by semicolons.
 	///

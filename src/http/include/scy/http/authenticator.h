@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_Authenticator_H
 #define SCY_HTTP_Authenticator_H
 
-
+#include "scy/dllexport.h"
 #include "scy/http/url.h"
 #include <string>
 
@@ -33,7 +33,7 @@ class Request;
 class Response;
 
 
-class Authenticator
+class SCYAPI Authenticator
 	/// This is a utility class for working with HTTP
 	/// authentication (basic or digest) in http::Request objects.
 	///

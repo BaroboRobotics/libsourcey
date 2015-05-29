@@ -20,7 +20,7 @@
 #ifndef SCY_Net_UDPSocket_H
 #define SCY_Net_UDPSocket_H
 
-
+#include "scy/dllexport.h"
 #include "scy/uv/uvpp.h"
 #include "scy/net/socket.h"	
 #include "scy/net/types.h"
@@ -31,7 +31,7 @@ namespace scy {
 namespace net {
 
 	
-class UDPSocket: public net::Socket, public uv::Handle
+class SCYAPI UDPSocket: public net::Socket, public uv::Handle
 {
 public:
 	typedef std::shared_ptr<UDPSocket> Ptr;

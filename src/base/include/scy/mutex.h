@@ -36,7 +36,7 @@ private:
 };
 
 
-class Mutex
+class SCYAPI Mutex
 	// This class is a wrapper around uv_mutex_t.
 	//
 	// A Mutex (mutual exclusion) is a synchronization mechanism
@@ -65,9 +65,8 @@ public:
 		// Unlocks the mutex so that it can be acquired by
 		// other threads.
 	
-private:
-	Mutex(const Mutex&);
-	Mutex& operator = (const Mutex&);
+	Mutex(const Mutex&) = delete;
+	Mutex& operator = (const Mutex&) = delete;
 
 	uv_mutex_t _mx;
 };

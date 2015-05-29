@@ -20,7 +20,7 @@
 #ifndef SCY_Memory_H
 #define SCY_Memory_H
 
-
+#include "scy/dllexport.h"
 #include "scy/logger.h"
 #include "scy/types.h"
 #include "scy/mutex.h"
@@ -295,8 +295,8 @@ protected:
 		// Destroys the SharedObject.
 		// The destructor should never be called directly.
 
-	SharedObject(const SharedObject&);
-	SharedObject& operator = (const SharedObject&);
+	SharedObject(const SharedObject&) = default;
+	SharedObject& operator = (const SharedObject&) = default;
 	
 	friend struct std::default_delete<SharedObject>;
 	//friend struct deleter::Deferred<SharedObject>;

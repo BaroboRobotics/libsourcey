@@ -20,7 +20,7 @@
 #ifndef SCY_Net_SSLSocket_H
 #define SCY_Net_SSLSocket_H
 
-
+#include "scy/dllexport.h"
 #include "scy/uv/uvpp.h"
 #include "scy/net/tcpsocket.h"
 #include "scy/net/socket.h"
@@ -33,7 +33,7 @@ namespace scy {
 namespace net {
 
 
-class SSLSocket: public TCPSocket	
+class SCYAPI SSLSocket: public TCPSocket	
 {
 public:	
 	typedef std::shared_ptr<SSLSocket> Ptr;

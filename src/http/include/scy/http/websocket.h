@@ -20,7 +20,7 @@
 #ifndef SCY_NET_WebSocket_H
 #define SCY_NET_WebSocket_H
 
-
+#include "scy/dllexport.h"
 #include "scy/base.h"
 #include "scy/buffer.h"
 #include "scy/net/socket.h"
@@ -123,7 +123,7 @@ static const char* ProtocolVersion = "13";
 //
 
 
-class WebSocketFramer
+class SCYAPI WebSocketFramer
 	/// This class implements a WebSocket parser according
 	/// to the WebSocket protocol described in RFC 6455.
 {
@@ -204,7 +204,7 @@ private:
 //
 
 
-class WebSocketAdapter: public net::SocketAdapter
+class SCYAPI WebSocketAdapter: public net::SocketAdapter
 {
 public:	
 	WebSocketAdapter(const net::Socket::Ptr& socket, ws::Mode mode, http::Request& request, http::Response& response); 
@@ -255,7 +255,7 @@ protected:
 //
 
 
-class WebSocket: public WebSocketAdapter
+class SCYAPI WebSocket: public WebSocketAdapter
 	/// Standalone WebSocket class.
 {
 public:		
@@ -282,7 +282,7 @@ protected:
 //
 
 
-class ConnectionAdapter: public WebSocketAdapter
+class SCYAPI ConnectionAdapter: public WebSocketAdapter
 	/// WebSocket class which belongs to a HTTP Connection.
 {
 public:	

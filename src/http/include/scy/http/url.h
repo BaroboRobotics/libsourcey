@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_URL_H
 #define SCY_HTTP_URL_H
 
-
+#include "scy/dllexport.h"
 #include "scy/base.h"
 #include "scy/collection.h"
 #include <http_parser.h>
@@ -30,7 +30,7 @@ namespace scy {
 namespace http {
 
 
-class URL
+class SCYAPI URL
 	/// An RFC 3986 based URL which uses an external c 
 	/// library to do the heavy lifting.
 	/// Constructors and assignment operators will throw

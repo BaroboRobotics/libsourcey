@@ -19,7 +19,7 @@
 #ifndef SCY_HTTP_Response_H
 #define SCY_HTTP_Response_H
 
-
+#include "scy/dllexport.h"
 #include "scy/http/message.h"
 #include "scy/http/cookie.h"
 #include "scy/datetime.h"
@@ -82,7 +82,7 @@ enum class StatusCode
 };
 
 
-class Response: public http::Message
+class SCYAPI Response: public http::Message
 	/// This class encapsulates an HTTP response message.
 {
 public:

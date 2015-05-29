@@ -21,7 +21,7 @@
 #ifndef SCY_Net_SSLManager_H
 #define SCY_Net_SSLManager_H
 
-
+#include "scy/dllexport.h"
 #include "scy/net/types.h"
 #include "scy/net/sslsession.h"
 #include "scy/net/sslcontext.h"
@@ -37,7 +37,7 @@ namespace net {
 class VerificationErrorDetails;
 
 
-class SSLManager
+class SCYAPI SSLManager
 	/// SSLManager is a singleton for holding the default server/client 
 	/// Context and handling callbacks for certificate verification errors
 	/// and private key passphrases.
@@ -148,7 +148,7 @@ inline void SSLManager::initNoVerifyClient()
 //
 
 
-class VerificationErrorDetails
+class SCYAPI VerificationErrorDetails
 	/// A utility class for certificate error handling.
 {
 public:

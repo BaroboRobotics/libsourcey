@@ -145,3 +145,6 @@ endif()
       
 # Define the project
 define_sourcey_dependency(libuv)
+if(MSVC)
+  #target_link_libraries(libuv ${libuv_DEPENDENCIES})
+endif()

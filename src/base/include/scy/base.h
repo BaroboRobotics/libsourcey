@@ -37,7 +37,7 @@
 //
 /// Cross platform configuration
 //
-
+#include "scy/dllexport.h"
 #include "scyconfig.h"
 
 #ifdef _WIN32

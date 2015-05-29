@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_ServerConnection_H
 #define SCY_HTTP_ServerConnection_H
 
-
+#include "scy/dllexport.h"
 #include "scy/timer.h"
 #include "scy/packetqueue.h"
 #include "scy/net/tcpsocket.h"
@@ -36,7 +36,7 @@ namespace http {
 	
 
 class ConnectionAdapter;
-class Connection: public net::SocketAdapter
+class SCYAPI Connection: public net::SocketAdapter
 {
 public:	
     Connection(const net::Socket::Ptr& socket);
@@ -122,7 +122,7 @@ protected:
 //
 
 
-class ConnectionAdapter: public ParserObserver, public net::SocketAdapter
+class SCYAPI ConnectionAdapter: public ParserObserver, public net::SocketAdapter
 	// Default HTTP socket adapter for reading and writing HTTP messages
 {
 public:

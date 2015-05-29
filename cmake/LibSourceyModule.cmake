@@ -49,7 +49,10 @@ macro(define_sourcey_module name)
   source_group("Src" FILES ${lib_srcs})
   source_group("Include" FILES ${lib_hdrs})
 
-  add_library(${name} ${lib_srcs} ${lib_hdrs})
+  add_library(${name} OBJECT ${lib_srcs} ${lib_hdrs})
+  target_compile_definitions(${name} PRIVATE SCY_DLL)
+  target_include_directories(${name} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
       
   # Set HAVE_SOURCEY_XXX at parent scope for inclusion
   # into our Config.h
@@ -66,7 +69,7 @@ macro(define_sourcey_module name)
   endforeach()  
 
   # Include external dependencies
-  target_link_libraries(${name} ${LibSourcey_INCLUDE_LIBRARIES})
+  #target_link_libraries(${name} ${LibSourcey_INCLUDE_LIBRARIES})
   add_dependencies(${name} ${LibSourcey_INCLUDE_LIBRARIES})
   
   # Include library and header directories
@@ -102,10 +105,10 @@ macro(define_sourcey_module name)
     
   # Add install routine, unless lib is header only
   if (lib_srcs)
-    install(TARGETS ${name}
-      RUNTIME DESTINATION bin COMPONENT main
-      LIBRARY DESTINATION lib COMPONENT main
-      ARCHIVE DESTINATION lib COMPONENT main)   
+    #install(TARGETS ${name}
+    #  RUNTIME DESTINATION bin COMPONENT main
+    #  LIBRARY DESTINATION lib COMPONENT main
+    #  ARCHIVE DESTINATION lib COMPONENT main)   
   endif()      
   
   # Build samples  

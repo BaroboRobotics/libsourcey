@@ -195,7 +195,7 @@ void SSLSocket::onRead(const char* data, std::size_t len)
 }
 
 
-void SSLSocket::onConnect(uv_connect_t* handle, int status)
+void SSLSocket::onConnect(uv_connect_t* /*handle*/, int status)
 {
 	TraceLS(this) << "On connect" << endl;
 	if (status) {

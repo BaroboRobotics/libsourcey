@@ -1,6 +1,5 @@
 include_directories("${LibSourcey_DEPENDENCIES_BUILD_DIR}/zlib")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../zlib") # for zlib.h
-
 # Include source files:
 set(minizip_SOURCE_FILES 
   ioapi.c
@@ -22,3 +21,4 @@ endif()
 # iowin32.h iowin32.c
 
 define_sourcey_dependency(minizip)
+#target_link_libraries(minizip zlibstatic)

@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_Cookie_H
 #define SCY_HTTP_Cookie_H
 
-
+#include "scy/dllexport.h"
 #include "scy/collection.h"
 #include "scy/net/types.h"
 
@@ -29,7 +29,7 @@ namespace scy {
 namespace http {
 
 
-class Cookie
+class SCYAPI Cookie
 	/// This class represents a HTTP Cookie.
 	///
 	/// A cookie is a small amount of information sent by a Web 

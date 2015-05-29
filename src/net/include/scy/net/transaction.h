@@ -20,7 +20,7 @@
 #ifndef SCY_Net_Transaction_H
 #define SCY_Net_Transaction_H
 
-
+#include "scy/dllexport.h"
 #include "scy/packettransaction.h"
 #include "scy/net/packetsocket.h"
 
@@ -30,7 +30,7 @@ namespace net {
 
 
 template <class PacketT>
-class Transaction: public PacketTransaction<PacketT>, public PacketSocketAdapter
+class SCYAPI Transaction: public PacketTransaction<PacketT>, public PacketSocketAdapter
 	/// This class provides request/response functionality for IPacket
 	/// types emitted from a Socket.
 {

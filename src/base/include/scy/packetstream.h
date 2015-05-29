@@ -42,7 +42,7 @@ struct PacketStreamState;
 //
 
 
-class PacketStreamAdapter
+class SCYAPI PacketStreamAdapter
 	/// This class is a wrapper for integrating external
 	/// classes with the a PacketStream's data flow and
 	/// state machine.
@@ -66,12 +66,12 @@ public:
 		// of the adapter to have ceased all outgoing packet transmission,
 		// especially in multi-thread scenarios.
 
-protected:
-	PacketStreamAdapter(const PacketStreamAdapter&); // = delete;
-	PacketStreamAdapter(PacketStreamAdapter&&); // = delete;
-	PacketStreamAdapter& operator=(const PacketStreamAdapter&); // = delete;
-	PacketStreamAdapter& operator=(PacketStreamAdapter&&); // = delete;
+	PacketStreamAdapter(const PacketStreamAdapter&) = delete;
+	PacketStreamAdapter(PacketStreamAdapter&&) = delete;
+	PacketStreamAdapter& operator=(const PacketStreamAdapter&) = delete;
+	PacketStreamAdapter& operator=(PacketStreamAdapter&&) = delete;
 
+protected:
 	PacketSignal& _emitter;
 };
 

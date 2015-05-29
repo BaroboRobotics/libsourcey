@@ -1,7 +1,7 @@
 #ifndef SCY_HTTP_Form_H
 #define SCY_HTTP_Form_H
 
-
+#include "scy/dllexport.h"
 #include "scy/collection.h"
 #include "scy/packetstream.h"
 #include "scy/thread.h"
@@ -22,7 +22,7 @@ class FormPart;
 //
 
 
-class FormWriter: public NVCollection, public PacketSource, public async::Startable
+class SCYAPI FormWriter: public NVCollection, public PacketSource, public async::Startable
 	/// FormWriter is a HTTP client connection adapter for writing HTML forms.
 	///
 	/// This class runs in its own thread so as not to block the event loop
@@ -183,7 +183,7 @@ protected:
 //
 
 
-class FormPart
+class SCYAPI FormPart
 	/// An implementation of FormPart.
 {
 public:	
@@ -232,7 +232,7 @@ protected:
 //
 
 
-class FilePart: public FormPart
+class SCYAPI FilePart: public FormPart
 	/// An implementation of FilePart for plain files.
 {
 public:
@@ -314,7 +314,7 @@ protected:
 //
 
 
-class StringPart: public FormPart
+class SCYAPI StringPart: public FormPart
 	/// An implementation of StringPart for plain files.
 {
 public:

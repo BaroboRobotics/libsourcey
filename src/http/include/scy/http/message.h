@@ -28,7 +28,7 @@
 #ifndef SCY_HTTP_Message_H
 #define SCY_HTTP_Message_H
 
-
+#include "scy/dllexport.h"
 #include "scy/collection.h"
 
 
@@ -36,7 +36,7 @@ namespace scy {
 namespace http {
 
 
-class Message: public NVCollection
+class SCYAPI Message: public NVCollection
 	/// The base class for Request and Response.
 	///
 	/// Defines the common properties of all HTTP messages.

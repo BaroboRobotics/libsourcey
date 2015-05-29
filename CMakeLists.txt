@@ -3,6 +3,8 @@
 # ============================================================================
 
 cmake_minimum_required(VERSION 2.8)
+cmake_policy(SET CMP0046 OLD)
+cmake_policy(SET CMP0054 OLD)
 
 # This _must_ go before project(LibSourcey) in order to work
 if(WIN32)
@@ -29,9 +31,20 @@ if(APPLE)
   set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}")
 endif()
 
+# ----------------------------------------------------------------------------
+# LibSourcey Build paths
+# ----------------------------------------------------------------------------
+set(LibSourcey_DIR ${PROJECT_SOURCE_DIR})
+set(LibSourcey_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
+set(LibSourcey_BUILD_DIR ${PROJECT_BINARY_DIR})
+set(LibSourcey_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
+set(LibSourcey_DEPENDENCIES_SOURCE_DIR "${LibSourcey_DIR}/deps")
+set(LibSourcey_DEPENDENCIES_BUILD_DIR "${LibSourcey_BUILD_DIR}/deps")
+set(LibSourcey_DEPENDENCIES_INSTALL_DIR "${LibSourcey_INSTALL_DIR}/share/libscy/deps")
+
 # Tell CMake where to locate our .cmake files
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
-set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${LibSourcey_DIR}/cmake)
+set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${LibSourcey_DIR}/cmake)
 
 # Include required cmake files
 include(LibSourceyUtilities REQUIRED)
@@ -48,7 +61,7 @@ include(LibSourceyVersion REQUIRED)
 set_option(BUILD_SHARED_LIBS          "Build shared libraries (.dll/.so) instead of static ones (.lib/.a)" NOT (WIN32 OR ANDROID OR IOS))
 set_option(BUILD_DEPENDENCIES         "Build third party dependencies"                           ON)
 set_option(BUILD_MODULES              "Build LibSourcey modules"                                 ON)
-set_option(BUILD_APPLICATIONS         "Build LibSourcey applications"                            ON)
+set_option(BUILD_APPLICATIONS         "Build LibSourcey applications"                            OFF)
 set_option(BUILD_MODULE_SAMPLES       "Build module sample applications?"                        OFF)
 set_option(BUILD_MODULE_TESTS         "Build module test applications?"                          OFF)
 set_option(BUILD_WITH_DEBUG_INFO      "Include debug info into debug libs"                       ON)
@@ -85,17 +98,6 @@ set(LibSourcey_BUILD_MODULES          "" CACHE INTERNAL "Modules to build" FORCE
 set(LibSourcey_BUILD_SAMPLES          "" CACHE INTERNAL "Samples to build" FORCE)
 set(LibSourcey_BUILD_TESTS            "" CACHE INTERNAL "Tests to build" FORCE)
 set(LibSourcey_BUILD_APPLICATIONS     "" CACHE INTERNAL "Applications to build" FORCE)
-
-# ----------------------------------------------------------------------------
-# LibSourcey Build paths
-# ----------------------------------------------------------------------------
-set(LibSourcey_DIR ${CMAKE_SOURCE_DIR})
-set(LibSourcey_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
-set(LibSourcey_BUILD_DIR ${CMAKE_BINARY_DIR})
-set(LibSourcey_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
-set(LibSourcey_DEPENDENCIES_SOURCE_DIR "${LibSourcey_DIR}/deps")
-set(LibSourcey_DEPENDENCIES_BUILD_DIR "${LibSourcey_BUILD_DIR}/deps")
-set(LibSourcey_DEPENDENCIES_INSTALL_DIR "${LibSourcey_INSTALL_DIR}/share/libscy/deps")
 
 # Append some common search paths for find_library
 # to find libraries from these locations first
@@ -193,7 +195,7 @@ set(LibSourcey_CONFIG_FILE_INCLUDE_DIR "${CMAKE_BINARY_DIR}/" CACHE PATH "Where 
 include_directories("${LibSourcey_CONFIG_FILE_INCLUDE_DIR}")
 
 # Set the LibSourcey_LIB_TYPE variable for add_library
-set(LibSourcey_LIB_TYPE STATIC)
+set(LibSourcey_LIB_TYPE OBJECT)
 if(BUILD_SHARED_LIBS)
   set(LibSourcey_LIB_TYPE SHARED)
 endif()
@@ -228,7 +230,7 @@ endif()
 # ----------------------------------------------------------------------------
 if(MSVC)  
   # CMAKE_CXX_STANDARD_LIBRARIES must be a string for MSVC
-  set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} advapi32.lib iphlpapi.lib psapi.lib shell32.lib ws2_32.lib dsound.lib winmm.lib strmiids.lib")
+  set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} crypt32.lib advapi32.lib iphlpapi.lib psapi.lib shell32.lib ws2_32.lib dsound.lib winmm.lib strmiids.lib")
 elseif(MSYS)
   set(CMAKE_CXX_STANDARD_LIBRARIES "${CMAKE_CXX_STANDARD_LIBRARIES} -lws2_32 -liphlpapi") #${LibSourcey_INCLUDE_LIBRARIES} 
 elseif(UNIX)
@@ -382,17 +384,34 @@ endif()
 # Include the LibSourcey source tree
 # ----------------------------------------------------------------------------
 if(BUILD_MODULES OR BUILD_APPLICATIONS)    
-  subdirlist(subdirs "${CMAKE_SOURCE_DIR}/src")
+  subdirlist(subdirs "${LibSourcey_DIR}/src")
+  set(allModuleObjects)
+  set(allModuleIncludeDirs)
   foreach(name ${subdirs})
     # This variable is so modules can set HAVE_LibSourcey_XXX for our
     # LibSourceyConfig.h inside the child scope. See include_sourcey_modules()
     # TODO: Need to refactor since modules may be nested.
     set(HAVE_LibSourcey_${name} 0)
-    set(dir "${CMAKE_SOURCE_DIR}/src/${name}")
+    set(dir "${LibSourcey_DIR}/src/${name}")
     if (EXISTS "${dir}/CMakeLists.txt")
       add_subdirectory(${dir})
     endif()
-  endforeach() 
+    list(APPEND allModuleObjects $<TARGET_OBJECTS:${name}>)
+    list(APPEND allModuleIncludeDirs ${LibSourcey_DIR}/src/${name}/include)
+    #list(APPEND allModuleIncludeDirs $<TARGET_PROPERTY:${name},INTERFACE_INCLUDE_DIRECTORIES>)
+  endforeach()
+  add_library(sourcey-pacm SHARED ${allModuleObjects}
+    $<TARGET_OBJECTS:libuv>
+    $<TARGET_OBJECTS:zlibstatic>
+    $<TARGET_OBJECTS:minizip>
+    $<TARGET_OBJECTS:jsoncpp>
+    $<TARGET_OBJECTS:http_parser>)
+  target_link_libraries(sourcey-pacm
+    PRIVATE ${LibSourcey_INCLUDE_LIBRARIES})
+  target_include_directories(sourcey-pacm
+    INTERFACE ${allModuleIncludeDirs}
+              ${CMAKE_BINARY_DIR}
+              ${LibSourcey_INCLUDE_DIRS})
 endif()
 
 # ----------------------------------------------------------------------------
@@ -413,7 +432,7 @@ set(PACKAGE_VERSION "${LibSourcey_VERSION}")
 
 status("Parsing 'LibSourceyConfig.h.cmake'")
 configure_file(
-  "${CMAKE_SOURCE_DIR}/cmake/LibSourceyConfig.h.cmake" 
+  "${LibSourcey_DIR}/cmake/LibSourceyConfig.h.cmake" 
   "${LibSourcey_CONFIG_FILE_INCLUDE_DIR}/scyconfig.h")
   
 # ----------------------------------------------------------------------------

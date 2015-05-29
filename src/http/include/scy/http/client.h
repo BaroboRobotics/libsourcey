@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_Client_H
 #define SCY_HTTP_Client_H
 
-
+#include "scy/dllexport.h"
 #include "scy/net/socket.h"
 #include "scy/net/tcpsocket.h"
 #include "scy/net/sslsocket.h"
@@ -34,7 +34,7 @@ namespace scy {
 namespace http {
 
 	
-class ProgressSignal: public Signal<const double&>
+class SCYAPI ProgressSignal: public Signal<const double&>
 {
 public:
 	void* sender;
@@ -59,7 +59,7 @@ public:
 
 
 class Client;
-class ClientConnection: public Connection
+class SCYAPI ClientConnection: public Connection
 {
 public:
 	typedef std::shared_ptr<ClientConnection> Ptr;
@@ -157,7 +157,7 @@ typedef std::vector<ClientConnection::Ptr> ClientConnectionPtrVec;
 //
 
 
-class ClientAdapter: public ConnectionAdapter
+class SCYAPI ClientAdapter: public ConnectionAdapter
 {
 public:
     ClientAdapter(ClientConnection& connection) : 
@@ -216,7 +216,7 @@ inline ClientConnection::Ptr createConnectionT(const URL& url, uv::Loop* loop = 
 //
 
 
-class Client
+class SCYAPI Client
 {
 public:
 	Client();

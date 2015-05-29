@@ -20,7 +20,7 @@
 #ifndef SCY_Net_Types_H
 #define SCY_Net_Types_H
 
-
+#include "scy/dllexport.h"
 #include "scy/stateful.h"
 
 				

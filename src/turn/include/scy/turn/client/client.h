@@ -72,16 +72,16 @@ struct ClientObserver
 	
 	virtual void onRelayDataReceived(Client& client, const char* data, std::size_t size, const net::Address& peerAddress) = 0;
 
-	virtual void onAllocationCreated(Client& client, const stun::Transaction& transaction) {};
-	virtual void onAllocationFailed(Client& client, int errorCode, const std::string& reason) {};
-	virtual void onAllocationDeleted(Client& client, const stun::Transaction& transaction) {};
-	virtual void onAllocationPermissionsCreated(Client& client, const PermissionList& permissions) {};
+	virtual void onAllocationCreated(Client& /*client*/, const stun::Transaction& /*transaction*/) {};
+	virtual void onAllocationFailed(Client& /*client*/, int /*errorCode*/, const std::string& /*reason*/) {};
+	virtual void onAllocationDeleted(Client& /*client*/, const stun::Transaction& /*transaction*/) {};
+	virtual void onAllocationPermissionsCreated(Client& /*client*/, const PermissionList& /*permissions*/) {};
 
-	virtual void onTransactionResponse(Client& client, const stun::Transaction& transaction) {};
+	virtual void onTransactionResponse(Client& /*client*/, const stun::Transaction& /*transaction*/) {};
 		// All received transaction responses will be routed here after local
 		// processing so the observer can easily implement extra functionality.
 
-	virtual void onTimer(Client& client) {};
+	virtual void onTimer(Client& /*client*/) {};
 		// Fires after the client's internal timer callback.
 		// Handy for performing extra async cleanup tasks.
 };

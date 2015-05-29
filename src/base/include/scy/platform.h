@@ -20,7 +20,7 @@
 #ifndef SCY_Platform_H
 #define SCY_Platform_H
 
-
+#include "scy/dllexport.h"
 #include "scy/types.h"
 #include <string>
 
@@ -32,22 +32,22 @@ namespace scy {
 /// Cross-platform utilities
 //
 	
-std::string getExePath();
+SCYAPI std::string getExePath();
 	// Returns the current executable path.
 
-std::string getCwd();
+SCYAPI std::string getCwd();
 	// Return the current working directory.
 
-UInt64 getFreeMemory();
+SCYAPI UInt64 getFreeMemory();
 	// Returns the current amount of free memory.
 
-UInt64 getTotalMemory();
+SCYAPI UInt64 getTotalMemory();
 	// Returns the current amount of used memory.
 
-void sleep(int ms);
+SCYAPI void sleep(int ms);
 	// Pause the current thread for the given ms duration.
 
-void pause();
+SCYAPI void pause();
 	// Pause the current thread until enter is pressed.
 
 
@@ -58,14 +58,14 @@ void pause();
 
 #ifdef WIN32
 
-bool getOsVersion(int* major, int* minor, int* build);
-bool isWindowsVistaOrLater();
-bool isWindowsXpOrLater();
+SCYAPI bool getOsVersion(int* major, int* minor, int* build);
+SCYAPI bool isWindowsVistaOrLater();
+SCYAPI bool isWindowsXpOrLater();
 
-std::wstring toUtf16(const char* utf8, std::size_t len);
-std::wstring toUtf16(const std::string& str);
-std::string toUtf8(const wchar_t* wide, std::size_t len);
-std::string toUtf8(const std::wstring& wstr);
+SCYAPI std::wstring toUtf16(const char* utf8, std::size_t len);
+SCYAPI std::wstring toUtf16(const std::string& str);
+SCYAPI std::string toUtf8(const wchar_t* wide, std::size_t len);
+SCYAPI std::string toUtf8(const std::wstring& wstr);
 
 #endif
 

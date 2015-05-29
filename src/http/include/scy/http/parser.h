@@ -16,6 +16,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 
+#include "scy/dllexport.h"
 //#include "scy/http/connection.h"
 #include "scy/net/socket.h"
 #include "scy/http/request.h"
@@ -31,14 +32,14 @@ namespace scy {
 namespace http {
 
 	
-struct ParserError
+struct SCYAPI ParserError
 {
 	http_errno code;
 	std::string message;
 };
 
 
-class ParserObserver
+class SCYAPI ParserObserver
 {
 public:
     virtual void onParserHeader(const std::string& name, const std::string& value) = 0;
@@ -50,7 +51,7 @@ public:
 };
 
 
-class Parser
+class SCYAPI Parser
 {
 public:
     Parser(http::Response* response); 

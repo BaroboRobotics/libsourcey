@@ -21,6 +21,7 @@
 #define SCY_Request_H
 
 
+#include "scy/dllexport.h"
 #include "scy/base.h"
 #include "scy/collection.h"
 #include "scy/http/message.h"
@@ -32,7 +33,7 @@ namespace scy {
 namespace http {
 	
 
-struct Method
+struct SCYAPI Method
 	/// HTTP request methods
 {
 	static const std::string Get;
@@ -46,7 +47,7 @@ struct Method
 };
 
 	
-class Request: public http::Message
+class SCYAPI Request: public http::Message
 	/// This class encapsulates an HTTP request message.
 	///
 	/// In addition to the properties common to all HTTP messages, 

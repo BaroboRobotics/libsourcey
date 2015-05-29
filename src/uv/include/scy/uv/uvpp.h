@@ -28,6 +28,7 @@
                                   // Todo: depreciate once we replace static functions with lambdas
 #endif
 
+#include "scy/dllexport.h"
 #include "uv.h"
 #include "scy/types.h"
 #include "scy/exception.h"
@@ -89,7 +90,7 @@ inline Loop* defaultLoop()
 //
 
 
-class Handle
+class SCYAPI Handle
 	/// A base class for managing the lifecycle of a libuv handle,  
 	/// including its asynchronous destruction mechanism.
 {

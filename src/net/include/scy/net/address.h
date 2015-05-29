@@ -20,7 +20,7 @@
 #ifndef SCY_Net_Address_H
 #define SCY_Net_Address_H
 
-
+#include "scy/dllexport.h"
 #include "scy/net/types.h"
 
 
@@ -29,7 +29,7 @@ namespace net {
 	
 
 class AddressBase;
-class Address
+class SCYAPI Address
 	/// This class represents an internet (IP) endpoint/socket
 	/// address. The address can belong either to the
 	/// IPv4 or the IPv6 address family and consists of a

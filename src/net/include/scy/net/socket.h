@@ -45,7 +45,7 @@ inline std::shared_ptr<SocketT> makeSocket(uv::Loop* loop = uv::defaultLoop())
 }
 
 
-class Socket: public SocketAdapter
+class SCYAPI Socket: public SocketAdapter
 	/// Socket is the base socket implementation
 	/// from which all sockets derive.
 {
@@ -138,7 +138,7 @@ protected:
 //
 
 
-struct PacketInfo: public IPacketInfo
+struct SCYAPI PacketInfo: public IPacketInfo
 	/// Provides information about packets emitted from a socket.
 	/// See SocketPacket.
 { 
@@ -168,7 +168,7 @@ struct PacketInfo: public IPacketInfo
 //
 
 
-class SocketPacket: public RawPacket 
+class SCYAPI SocketPacket: public RawPacket 
 	/// SocketPacket is the default packet type emitted by sockets.
 	/// SocketPacket provides peer address information and a buffer
 	/// reference for nocopy binary operations.

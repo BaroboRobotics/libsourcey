@@ -20,7 +20,7 @@
 #ifndef SCY_Net_SSLSession_H
 #define SCY_Net_SSLSession_H
 
-
+#include "scy/dllexport.h"
 #include "scy/memory.h"
 #include "scy/net/types.h"
 
@@ -31,7 +31,7 @@ namespace scy {
 namespace net {
 
 	
-class SSLSession : public SharedObject
+class SCYAPI SSLSession : public SharedObject
 	/// This class encapsulates a SSL session object
 	/// used with session caching on the client side.
 	///

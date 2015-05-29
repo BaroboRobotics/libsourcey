@@ -36,18 +36,20 @@ macro(define_sourcey_dependency name)
   source_group("Include" FILES ${${name}_HEADER_FILES})
       
   add_library(${name} ${LibSourcey_LIB_TYPE} ${${name}_SOURCE_FILES} ${${name}_HEADER_FILES})
+  target_compile_definitions(${name} PRIVATE SCY_DLL)
   
   if (${name}_DEPENDENCIES)
     add_dependencies(${name} ${${name}_DEPENDENCIES})
   endif()
   
   # Include current directory and existing dependency directories
+  target_include_directories(${name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
   include_directories("${CMAKE_CURRENT_SOURCE_DIR}" "${LibSourcey_INCLUDE_DIRS}")
   
   # Cache dependency directories for inclusion by modules and applications
   get_directory_property(lib_directories INCLUDE_DIRECTORIES)
   set(LibSourcey_INCLUDE_DIRS ${lib_directories} PARENT_SCOPE)
-  set(LibSourcey_INCLUDE_LIBRARIES ${LibSourcey_INCLUDE_LIBRARIES} ${name} PARENT_SCOPE)
+  #set(LibSourcey_INCLUDE_LIBRARIES ${LibSourcey_INCLUDE_LIBRARIES} ${name} PARENT_SCOPE)
   
   #message(STATUS "- Linking dependency ${name} with libraries: ${LibSourcey_INCLUDE_LIBRARIES}")    
   #message("${name}: Library Dirs: ${LibSourcey_LIBRARY_DIRS}")    
@@ -79,10 +81,10 @@ macro(define_sourcey_dependency name)
   if (NOT INSTALL_DESTINATION)
     set(INSTALL_DESTINATION ${LibSourcey_DEPENDENCIES_INSTALL_DIR}/lib) 
   endif()
-  install(TARGETS ${name}
-    RUNTIME DESTINATION ${INSTALL_DESTINATION} COMPONENT main   
-    ARCHIVE DESTINATION ${INSTALL_DESTINATION} COMPONENT main
-    LIBRARY DESTINATION ${INSTALL_DESTINATION} COMPONENT main) 
+  #install(TARGETS ${name}
+  #  RUNTIME DESTINATION ${INSTALL_DESTINATION} COMPONENT main   
+  #  ARCHIVE DESTINATION ${INSTALL_DESTINATION} COMPONENT main
+  #  LIBRARY DESTINATION ${INSTALL_DESTINATION} COMPONENT main) 
         
 endmacro()
 

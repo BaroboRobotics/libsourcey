@@ -42,7 +42,7 @@ class PacketSocket;
 //
 
 
-class PacketSocketAdapter: public SocketAdapter, public PacketSignal
+class SCYAPI PacketSocketAdapter: public SocketAdapter, public PacketSignal
 {	
 public:	
 	net::Socket::Ptr socket;

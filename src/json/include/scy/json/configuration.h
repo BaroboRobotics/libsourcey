@@ -20,7 +20,7 @@
 #ifndef SCY_JSON_Configuration_H
 #define SCY_JSON_Configuration_H
 
-
+#include "scy/dllexport.h"
 #include "scy/configuration.h"
 #include "scy/json/json.h"
 
@@ -31,7 +31,7 @@ namespace scy {
 namespace json {
 
 
-class Configuration: public scy::Configuration, public json::Value
+class SCYAPI Configuration: public scy::Configuration, public json::Value
 {
 public:
 	Configuration();

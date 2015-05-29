@@ -156,7 +156,7 @@ class Stream: public uv::Handle
 		Read.emit(self(), data, len);
 	}
 
-	static void handleReadCommon(uv_stream_t* handle, ssize_t nread, const uv_buf_t* buf, uv_handle_type pending) 
+	static void handleReadCommon(uv_stream_t* handle, ssize_t nread, const uv_buf_t* buf, uv_handle_type /*pending*/) 
 	{	
 		auto self = reinterpret_cast<Stream*>(handle->data);
 		//TraceL << "Handle read: " << nread << std::endl;
@@ -196,7 +196,7 @@ class Stream: public uv::Handle
 		handleReadCommon((uv_stream_t*)handle, nread, buf, pending);
 	}
 	
-	static void allocReadBuffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t* buf)
+	static void allocReadBuffer(uv_handle_t *handle, size_t /*suggested_size*/, uv_buf_t* buf)
 	{
 		auto self = reinterpret_cast<Stream*>(handle->data);
 

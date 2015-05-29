@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_Packetizers_H
 #define SCY_HTTP_Packetizers_H
 
-
+#include "scy/dllexport.h"
 #include "scy/signal.h"
 #include "scy/http/connection.h"
 #include <sstream>
@@ -35,7 +35,7 @@ namespace http {
 //
 
 
-class ChunkedAdapter: public IPacketizer
+class SCYAPI ChunkedAdapter: public IPacketizer
 {
 public:
 	Connection* connection;
@@ -152,7 +152,7 @@ public:
 //
 
 
-class MultipartAdapter: public IPacketizer
+class SCYAPI MultipartAdapter: public IPacketizer
 {
 public:
 	Connection* connection;

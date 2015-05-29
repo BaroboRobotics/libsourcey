@@ -20,7 +20,7 @@
 #ifndef SCY_JSON_ISerializable_h
 #define SCY_JSON_ISerializable_h
 
-
+#include "scy/dllexport.h"
 #include "scy/json/json.h"
 #include <ostream>
 
@@ -29,7 +29,7 @@ namespace scy {
 namespace json {
 
 
-class ISerializable
+class SCYAPI ISerializable
 {
 public:
    virtual ~ISerializable() {};

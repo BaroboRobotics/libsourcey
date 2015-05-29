@@ -34,7 +34,7 @@ namespace scy {
 namespace net {
 
 
-class SocketAdapter
+class SCYAPI SocketAdapter
 	/// SocketAdapter is the abstract interface for all socket classes.
 	/// A SocketAdapter can also be attached to a Socket in order to 
 	/// override default Socket callbacks and behaviour, while still

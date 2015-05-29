@@ -20,7 +20,7 @@
 #ifndef SCY_Net_SSLContext_H
 #define SCY_Net_SSLContext_H
 
-
+#include "scy/dllexport.h"
 #include "scy/memory.h"
 #include "scy/util.h" // remove me
 #include "scy/crypto/x509certificate.h"
@@ -35,7 +35,7 @@ namespace scy {
 namespace net {
 
  
-class SSLContext: public SharedObject
+class SCYAPI SSLContext: public SharedObject
 	/// This class encapsulates context information for
 	/// an SSL server or client, such as the certificate
 	/// verification mode and the location of certificates

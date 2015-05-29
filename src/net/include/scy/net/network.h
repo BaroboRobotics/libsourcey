@@ -20,7 +20,7 @@
 #ifndef SCY_Net_Network_H
 #define SCY_Net_Network_H
 
-
+#include "scy/dllexport.h"
 #include "scy/types.h"
 #include "scy/uv/uvpp.h"
 
@@ -66,7 +66,7 @@ inline void getNetworkInterfaces(std::vector<net::Address>& hosts)
 // net::resolveDNS("google.com", 80, onDNSResult);
 
 
-struct DNSResult
+struct SCYAPI DNSResult
 {
 	std::string host;
 		// The host to resolve

@@ -209,7 +209,7 @@ void Connection::onSocketConnect()
 }
 
 
-void Connection::onSocketRecv(const MutableBuffer& buffer, const net::Address& peerAddress)
+void Connection::onSocketRecv(const MutableBuffer& buffer, const net::Address& /*peerAddress*/)
 {		
 	TraceLS(this) << "On socket recv" << endl;
 	//_timeout.stop();

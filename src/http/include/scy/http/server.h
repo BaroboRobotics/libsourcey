@@ -20,7 +20,7 @@
 #ifndef SCY_HTTP_Server_H
 #define SCY_HTTP_Server_H
 
-
+#include "scy/dllexport.h"
 #include "scy/base.h"
 #include "scy/logger.h"
 #include "scy/net/socket.h"
@@ -37,7 +37,7 @@ namespace http {
 
 class Server;
 class ServerResponder;
-class ServerConnection: public Connection
+class SCYAPI ServerConnection: public Connection
 {
 public:
 	typedef std::shared_ptr<ServerConnection> Ptr;
@@ -79,7 +79,7 @@ typedef std::vector<ServerConnection::Ptr> ServerConnectionList;
 	
 // -------------------------------------------------------------------
 //
-class ServerAdapter: public ConnectionAdapter
+class SCYAPI ServerAdapter: public ConnectionAdapter
 {
 public:
     ServerAdapter(ServerConnection& connection) : 
@@ -91,7 +91,7 @@ public:
 
 // -------------------------------------------------------------------
 //
-class ServerResponder
+class SCYAPI ServerResponder
 	/// The abstract base class for HTTP ServerResponders 
 	/// created by HTTP Server.
 	///
@@ -142,7 +142,7 @@ private:
 
 // -------------------------------------------------------------------
 //
-class ServerResponderFactory
+class SCYAPI ServerResponderFactory
 	/// This implementation of a ServerResponderFactory
 	/// is used by HTTPServer to create ServerResponder objects.
 {
@@ -158,7 +158,7 @@ public:
 
 // -------------------------------------------------------------------
 //
-class Server
+class SCYAPI Server
 	/// DISCLAIMER: This HTTP server is not intended to be standards 
 	/// compliant. It was created to be a fast (nocopy where possible)
 	/// solution for streaming video to web browsers.
@@ -202,7 +202,7 @@ protected:
 
 // ---------------------------------------------------------------------
 //
-class BadRequestHandler: public ServerResponder
+class SCYAPI BadRequestHandler: public ServerResponder
 {
 public:
 	BadRequestHandler(ServerConnection& connection) : 		

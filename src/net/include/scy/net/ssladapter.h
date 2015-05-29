@@ -20,7 +20,7 @@
 #ifndef SCY_Net_SSLAdapter_H
 #define SCY_Net_SSLAdapter_H
 
-
+#include "scy/dllexport.h"
 #include "scy/uv/uvpp.h"
 #include "scy/net/address.h"
 #include "scy/net/types.h"
@@ -37,7 +37,7 @@ namespace net {
 
  
 class SSLSocket;
-class SSLAdapter 
+class SCYAPI SSLAdapter 
 	/// A wrapper for the OpenSSL SSL connection context
 	/// TODO: Decouple from SSLSocket implementation
 {
