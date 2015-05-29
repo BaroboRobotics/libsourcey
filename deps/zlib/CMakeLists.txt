@@ -228,6 +228,8 @@ include_directories("${LibSourcey_DEPENDENCIES_BUILD_DIR}")
 # ${CMAKE_CURRENT_SOURCE_DIR}
 #set(LibSourcey_INCLUDE_DIRS ${LibSourcey_INCLUDE_DIRS} #${LibSourcey_DEPENDENCIES_BUILD_DIR})
 
+option(SKIP_INSTALL_ALL "Don't install anything" ON)
+
 if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL )
     install(TARGETS zlib #zlibstatic
         RUNTIME DESTINATION "${INSTALL_BIN_DIR}"

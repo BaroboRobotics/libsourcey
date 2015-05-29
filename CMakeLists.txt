@@ -400,18 +400,38 @@ if(BUILD_MODULES OR BUILD_APPLICATIONS)
     list(APPEND allModuleIncludeDirs ${LibSourcey_DIR}/src/${name}/include)
     #list(APPEND allModuleIncludeDirs $<TARGET_PROPERTY:${name},INTERFACE_INCLUDE_DIRECTORIES>)
   endforeach()
+
+  # Monolithic library, including pacm
   add_library(sourcey-pacm SHARED ${allModuleObjects}
     $<TARGET_OBJECTS:libuv>
     $<TARGET_OBJECTS:zlibstatic>
     $<TARGET_OBJECTS:minizip>
     $<TARGET_OBJECTS:jsoncpp>
     $<TARGET_OBJECTS:http_parser>)
+
+  set_target_properties(sourcey-pacm PROPERTIES
+    VERSION ${LibSourcey_VERSION}
+    SOVERSION ${LibSourcey_SOVERSION}
+    MACOSX_RPATH ON
+    )
+
   target_link_libraries(sourcey-pacm
     PRIVATE ${LibSourcey_INCLUDE_LIBRARIES})
+
   target_include_directories(sourcey-pacm
     INTERFACE ${allModuleIncludeDirs}
               ${CMAKE_BINARY_DIR}
               ${LibSourcey_INCLUDE_DIRS})
+
+  if(WIN32)
+    set(dest .)
+  elseif(APPLE)
+    set(dest ../MacOS)
+  else()
+    set(dest lib)
+  endif()
+
+  install(TARGETS sourcey-pacm DESTINATION ${dest})
 endif()
 
 # ----------------------------------------------------------------------------
