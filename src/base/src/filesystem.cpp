@@ -90,7 +90,7 @@ std::string extname(const std::string& path, bool includeDot)
 	if (dirp != std::string::npos && dotp < dirp)
 		return "";
 
-	return path.substr(dotp + includeDot ? 0 : 1);
+	return path.substr(dotp + size_t(!includeDot));
 }
 
 
