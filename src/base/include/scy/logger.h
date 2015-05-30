@@ -92,7 +92,7 @@ class LogChannel;
 //
 
 
-class LogWriter
+class SCYAPI LogWriter
 {
 public:	
 	LogWriter();
@@ -108,7 +108,7 @@ public:
 //
 
 
-class AsyncLogWriter: public LogWriter, public async::Runnable
+class SCYAPI AsyncLogWriter: public LogWriter, public async::Runnable
 {
 public:	
 	AsyncLogWriter();
@@ -140,7 +140,7 @@ protected:
 //
 
 
-class Logger
+class SCYAPI Logger
 {
 public:
 	Logger();
@@ -214,7 +214,7 @@ protected:
 //
 
 
-struct LogStream
+struct SCYAPI LogStream
 {
 	LogLevel level;
 	int line;
@@ -347,7 +347,7 @@ inline LogStream& printL(const char* level, const void* ptr, const char* realm =
 //
 
 
-class LogChannel
+class SCYAPI LogChannel
 {
 public:	
 	LogChannel(const std::string& name, LogLevel level = LDebug, const char* timeFormat = "%H:%M:%S");
@@ -377,7 +377,7 @@ protected:
 //
 
 
-class ConsoleChannel: public LogChannel
+class SCYAPI ConsoleChannel: public LogChannel
 {		
 public:
 	ConsoleChannel(const std::string& name, LogLevel level = LDebug, const char* timeFormat = "%H:%M:%S");
@@ -392,7 +392,7 @@ public:
 //
 
 
-class FileChannel: public LogChannel
+class SCYAPI FileChannel: public LogChannel
 {	
 public:
 	FileChannel(
@@ -422,7 +422,7 @@ protected:
 //
 
 
-class RotatingFileChannel: public LogChannel
+class SCYAPI RotatingFileChannel: public LogChannel
 {	
 public:
 	RotatingFileChannel(

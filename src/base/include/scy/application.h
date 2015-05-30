@@ -31,7 +31,7 @@
 namespace scy {
 
 		
-class Application
+class SCYAPI Application
 	/// A simple event based application which runs until the
 	/// internal event loop is terminated.
 	///
@@ -82,7 +82,7 @@ protected:
 
 typedef std::map<std::string, std::string> OptionMap;
 
-struct OptionParser 
+struct SCYAPI OptionParser 
 {	
 	std::string exepath; // TODO: UTF8
 	OptionMap args;
