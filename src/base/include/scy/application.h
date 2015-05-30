@@ -51,7 +51,8 @@ public:
 		// May be assigned at construction, otherwise the default
 		// event loop is used.
 	
-	Application(uv::Loop* loop = uv::defaultLoop());
+	Application();
+	Application(uv::Loop* loop);
 	~Application();
 	
 	void run();

@@ -44,11 +44,15 @@ Application& Application::getDefault()
 	return *internal::singleton.get();
 }
 
+Application::Application() :
+	Application(uv::defaultLoop())
+{
+	DebugLS(this) << "Create" << std::endl;
+}
 
 Application::Application(uv::Loop* loop) :
 	loop(loop)
 {
-	DebugLS(this) << "Create" << std::endl;
 }
 
 	
