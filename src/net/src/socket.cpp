@@ -69,9 +69,14 @@ void Socket::connect(const std::string& host, UInt16 port)
 				return;
 			}
 
-			try {	
+			auto addr = dns.addr;
+			if (!addr.valid()) {
+				addr = net::Address("127.0.0.1", addr.port());
+			}
+
+			try {
 				// Connect to resolved host
-				sock->connect(dns.addr);
+				sock->connect(addr);
 			}
 			catch (...) {
 				// Swallow errors
