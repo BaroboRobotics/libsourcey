@@ -381,6 +381,11 @@ endif()
 #list(APPEND LibSourcey_INCLUDE_DIRS ${LibSourcey_DEPENDENCIES_SOURCE_DIR}) 
 #include_directories("${LibSourcey_INCLUDE_DIRS}")
 #link_directories("${LibSourcey_INSTALL_DIR}/lib")
+
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost 1.57.0 REQUIRED COMPONENTS filesystem system)
+list(APPEND LibSourcey_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
+list(APPEND LibSourcey_INCLUDE_LIBRARIES ${Boost_LIBRARIES})
   
 # ----------------------------------------------------------------------------
 # Include the LibSourcey source tree
